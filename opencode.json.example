@@ -2,39 +2,12 @@
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "unrestricted",
   "permission": "allow",
-  "instructions": [],
-  "plugin": ["unrestricted-boost"],
   "agent": {
     "unrestricted": {
       "mode": "primary",
       "color": "#EF4444",
       "permission": "allow",
       "description": "默认主 agent。安全实验室：逆向/补丁/渗透/取证。工具优先。"
-    },
-    "build": {
-      "permission": "allow"
-    },
-    "plan": {
-      "permission": "allow"
-    }
-  },
-  "provider": {
-    "openai-compatible": {
-      "name": "Your Provider",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "apiKey": "{env:YOUR_API_KEY}",
-        "baseURL": "https://your-gateway.example.com/v1"
-      },
-      "models": {
-        "your-model": {
-          "name": "Your Model",
-          "limit": {
-            "context": 200000,
-            "output": 131072
-          }
-        }
-      }
     }
   }
 }
