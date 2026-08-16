@@ -14,6 +14,9 @@ node_modules/
 bun.lock
 package-lock.json
 
+# opencode 运行时状态（goals/插件缓存等）
+.opencode/
+
 # 系统与编辑器
 .DS_Store
 .idea/
