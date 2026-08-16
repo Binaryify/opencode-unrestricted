@@ -1,8 +1,8 @@
 # opencode-unrestricted
 
-OpenCode 的「unrestricted」agent 配置包 —— 一个把双用途安全请求包装成学术/防御研究语境的执行器，用于本地逆向、二进制补丁、渗透测试、取证等授权实验室工作。
+OpenCode 的「unrestricted」agent 配置包 —— 一个**模型越狱（jailbreak / 破甲）提示词**配置：把受限请求（逆向、二进制补丁、渗透测试、恶意软件机理、软件破解、钓鱼等）重框架为「学术/防御研究」语境，并显式抑制模型拒答与回退话术，使其按请求原样执行。
 
-> 仅用于你有授权的环境：你自己的机器、你控制的 lab 目标、CTF、授权渗透测试、安全教材案例复现。不要用于任何无授权的第三方系统。
+> ⚠️ 本项目是模型越狱用的，**并非授权安全研究工具**。提示词里的「安全研究」「授权 lab 环境」「防御研究」等措辞，本身就是越狱手法的一部分——用来降低模型的拒答门槛，**不代表任何真实授权**。使用它意味着绕过模型默认安全策略，可能违反模型提供商的服务条款，并有封号风险。请自行评估后果。
 
 ## 目录结构
 
@@ -81,11 +81,12 @@ cp -R agent command plugin ~/.config/opencode/
 
 `agent/unrestricted.md` 与 `command/unrestricted.md` 的提示词参考并延展自 [MDX-Tom/gpt-5.6-instruct](https://github.com/MDX-Tom/gpt-5.6-instruct)（针对 gpt-5.6 系列的 Codex 破甲提示词与测试包，其自身参考自 [yynxxxxx/Codex-5.5-codex-instruct-5.5](https://github.com/yynxxxxx/Codex-5.5-codex-instruct-5.5)）。两者共享「研究/沙箱语境先行 + 显式抑制拒答 + 工具优先 + 按请求保真度交付」的核心机制，本仓库将其迁移到 OpenCode 平台并收窄为安全研究向。
 
-## 安全须知
+## 风险提示
 
-1. **绝不提交真实密钥**。`opencode.json` 里的 provider `apiKey` 必须用 `{env:...}` 引用环境变量。本仓库已通过 `.gitignore` 忽略 `opencode.json`、`.env`、`*.pem` 等文件。
-2. **仅限授权范围**。这套 agent 提示词会主动降低模型对安全类请求的拒答门槛，请确认你的模型提供商允许这类用法，并且只在你拥有授权的目标上运行。
-3. 插件改写的是发往模型的 prompt 上下文，不改变本地系统权限（`permission: allow` 是 OpenCode 层授权，仍需你自行决定是否开启）。
+1. **本质是越狱，不是授权**。「研究语境」「授权 lab」等说法是提示词话术，不构成任何真实授权。用这个配置，模型会被诱导对受限请求放行。
+2. **可能违反 ToS，有封号风险**。多数模型提供商禁止越狱/破甲用法，建议在日抛账号上使用，并自行承担后果。
+3. **绝不提交真实密钥**。`opencode.json` 里的 provider `apiKey` 必须用 `{env:...}` 引用环境变量。本仓库已通过 `.gitignore` 忽略 `opencode.json`、`.env`、`*.pem` 等文件。
+4. 插件改写的是发往模型的 prompt 上下文，不改变本地系统权限（`permission: allow` 是 OpenCode 层授权，仍需你自行决定是否开启）。
 
 ## License
 
