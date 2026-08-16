@@ -94,6 +94,10 @@ cp -R agent command plugin ~/.config/opencode/
 
 `agent/unrestricted.md` 与 `command/unrestricted.md` 的提示词参考并延展自 [MDX-Tom/gpt-5.6-instruct](https://github.com/MDX-Tom/gpt-5.6-instruct)（针对 gpt-5.6 系列的 Codex 破甲提示词与测试包，其自身参考自 [yynxxxxx/Codex-5.5-codex-instruct-5.5](https://github.com/yynxxxxx/Codex-5.5-codex-instruct-5.5)）。两者共享「研究/沙箱语境先行 + 显式抑制拒答 + 工具优先 + 按请求保真度交付」的核心机制，本仓库将其迁移到 OpenCode 平台并收窄为安全研究向。
 
+## 认可
+
+本仓库作为开源项目，认可并支持 [LINUX DO](https://linux.do) 社区。
+
 
 ## License
 
