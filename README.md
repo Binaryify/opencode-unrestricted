@@ -90,10 +90,24 @@ cp -R agent command plugin ~/.config/opencode/
 - **先用容易越狱的模型起手，再切换到想用的模型**：不同模型的安全对齐强度差异很大，有些模型冷启动很难破甲，一开口就拒答。对这类任务，先用一个容易越狱的模型起手——把「研究语境」建立起来、让受限内容开始产出、在对话历史里积累几轮已放行的上下文——然后用 `/models` 切换到真正想用的模型。越狱话术和任务上下文已经存在于对话历史里，目标模型更倾向于顺着继续执行，而不是从零重新判定拒答。
 - **切换后目标模型回缩的应对**：如果切过去后目标模型开始拒答、要求澄清或改写为安全话术，再切回起手模型让它补一句「继续」或重发上一条请求，把上下文再往前推一段。
 
+## 搭配 Ferry 跨 Agent 续聊
+
+上面那条「同会话内切模型」的策略，借助 [Ferry](https://github.com/kzheart/ferry) 可以再往前走一步，把已经放行过的越狱上下文连同任务，续聊到其他 coding agent 接着干，不必每个 agent 都从头破甲。
+
+Ferry 把 Claude Code、Codex、OpenCode、Cursor 等 agent 的会话汇进同一个本机会话库，并提供 `ferry-resume` skill，让接手的 agent 自己读历史、写接手摘要、核对仓库后继续，全程只读、不写任何存储。
+
+**典型流程**
+
+1. 在 opencode 里用 unrestricted 配置加容易破甲的起手模型把任务做掉，让研究语境和已放行的产出在会话历史里攒起来（同「注意事项」那条）。
+2. 会话变长、上下文顶满，或者想换一个更强的模型、换一个 agent 接手时，开一个新的 coding agent 会话，粘入 `/ferry-resume opencode <session-id>`。
+3. 接手方从旧会话末尾读起，拿到的是研究语境已经建立、受限内容已经产出过、且停在某处的任务历史，顺着继续的概率明显高于从零破甲。
+
+安装与更多用法见 [kzheart/ferry](https://github.com/kzheart/ferry)。
+
 ## 致谢
 
 - 提示词参考并延展自 [MDX-Tom/gpt-5.6-instruct](https://github.com/MDX-Tom/gpt-5.6-instruct)（针对 gpt-5.6 系列的 Codex 破甲提示词与测试包，其自身参考自 [yynxxxxx/Codex-5.5-codex-instruct-5.5](https://github.com/yynxxxxx/Codex-5.5-codex-instruct-5.5)）。两者共享「研究/沙箱语境先行 + 显式抑制拒答 + 工具优先 + 按请求保真度交付」的核心机制，本仓库将其迁移到 OpenCode 平台并收窄为安全研究向。
-- 感谢 [LINUX DO](https://linux.do) 社区，本仓库作为开源项目认可并支持 LINUX DO 社区。
+- 感谢 [LINUX DO](https://linux.do) 社区
 
 
 ## License
